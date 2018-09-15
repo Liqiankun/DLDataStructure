@@ -9,7 +9,7 @@ public class Main {
         arr.add(1, 100);
         System.out.println(arr);
 
-        arr.addFirst(1);
+        arr.addFirst(100);
         System.out.println(arr);
 
         arr.set(11, 1);

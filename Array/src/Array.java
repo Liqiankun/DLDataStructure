@@ -77,16 +77,17 @@ public class Array<Element> {
     }
 
     public boolean contains(Element e){
-        for (int i = 0; i < data.length; i++) {
-            if (data[i] == e)
+        for (int i = 0; i < size; i++) {
+            System.out.println(data[i]);
+            if (data[i].equals(e))
                 return true;
         }
         return false;
     }
 
     public int find(Element e){
-        for (int i = 0; i < data.length; i++) {
-            if (data[i] == e)
+        for (int i = 0; i < size; i++) {
+            if (data[i].equals(e))
                 return i;
         }
         return -1;
