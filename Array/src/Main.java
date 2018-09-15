@@ -14,5 +14,16 @@ public class Main {
 
         arr.set(11, 1);
         System.out.println(arr);
+
+        System.out.println(arr.getCapacity());
+
+        System.out.println(arr.contains(11));
+
+        System.out.println(arr.find(11));
+
+        System.out.println(arr.removeFirst());
+
+        System.out.println(arr.removeLast());
+
     }
 }
