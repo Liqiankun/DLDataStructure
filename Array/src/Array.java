@@ -1,10 +1,10 @@
-public class Array {
+public class Array<Element> {
 
-    private int[] data;
+    private Element[] data;
     private int size;
 
     public Array(int capacity){
-        data = new int[capacity];
+        data = (Element[]) new Object[capacity];
         size = 0;
     }
 
@@ -24,19 +24,20 @@ public class Array {
         return size == 0;
     }
 
-    public void addLast(int e){
+    public void addLast(Element e){
         add(size, e);
     }
 
-    public void addFirst(int e){
+    public void addFirst(Element e){
         add(0, e);
     }
 
-    public void add(int index, int e){
-        if (size == data.length)
-            throw new IllegalArgumentException("AddLast fail. Array is full!");
+    public void add(int index, Element e){
         if (index < 0 || index > size)
             throw new IllegalArgumentException("AddLast fail. Require index >=0 and index <= size");
+
+        if (size == data.length)
+            resize(data.length * 2);
 
         for (int i = size - 1; i >= index; i--)
             data[i + 1] = data[i];
@@ -45,56 +46,59 @@ public class Array {
         size ++;
     }
 
-    public int removeFirst(){
+    public Element removeFirst(){
         return remove(0);
     }
 
-    public int removeLast(){
+    public Element removeLast(){
         return remove(size - 1);
     }
 
-    public int remove(int index){
+    public Element remove(int index){
         if (index < 0 || index > size)
             throw new IllegalArgumentException("AddLast fail. Require index >=0 and index <= size");
-        int ret = data[index];
+
+        Element ret = data[index];
         for (int i = index + 1; i < size; i++)
             data[i - 1] = data[i];
         size --;
+        data[size] = null;
+
+        if (size == data.length / 2)
+            resize(data.length / 2); 
+
         return ret;
     }
 
-    public void removeElement(int e){
+    public void removeElement(Element e){
         int index = find(e);
         if (index != -1)
             remove(index);
     }
 
-
-    public boolean contains(int e){
+    public boolean contains(Element e){
         for (int i = 0; i < data.length; i++) {
-            if (data[i] == e) {
+            if (data[i] == e)
                 return true;
-            }
         }
         return false;
     }
 
-    public int find(int e){
+    public int find(Element e){
         for (int i = 0; i < data.length; i++) {
-            if (data[i] == e) {
+            if (data[i] == e)
                 return i;
-            }
         }
         return -1;
     }
 
-    int get(int index){
+    Element get(int index){
         if (index < 0 || index >= size)
             throw new IllegalArgumentException("Get fail. Index is illegal!");
         return data[index];
     }
 
-    void set(int index, int e) {
+    void set(int index, Element e) {
         if (index < 0 || index >= size)
             throw new IllegalArgumentException("Set fail. Index is illegal!");
         data[index] = e;
@@ -112,5 +116,12 @@ public class Array {
         }
         res.append(']');
         return res.toString();
+    }
+
+    private void resize(int newCapacity){
+        Element[] newData = (Element[]) new Object[newCapacity];
+        for (int i = 0; i < size; i ++)
+            newData[i] = data[i];
+        data = newData;
     }
 }
