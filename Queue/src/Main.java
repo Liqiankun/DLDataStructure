@@ -43,5 +43,9 @@ public class Main {
         double loopTime = performanceTest(loopQueue, operationCount);
         System.out.println("LoopQueue time is " + loopTime);
 
+        LinkedListQueue linkedListQueue = new LinkedListQueue();
+        double linkedListTime = performanceTest(linkedListQueue, operationCount);
+        System.out.println("LinkedListTime time is " + linkedListTime);
+
     }
 }

@@ -59,6 +59,17 @@ public class LoopQueue<Element> implements Queue<Element> {
         return data[front];
     }
 
+
+    private void resize(int newCapacity){
+        Element[] newData = (Element[]) new Object[newCapacity + 1];
+        for (int i = 0; i < size; i ++)
+            newData[i] = data[(i + front) % data.length];
+        data = newData;
+        front = 0;
+        tail = size;
+    }
+
+
     @Override
     public String toString(){
         StringBuilder res = new StringBuilder();
@@ -71,15 +82,6 @@ public class LoopQueue<Element> implements Queue<Element> {
         }
         res.append("] tail");
         return res.toString();
-    }
-
-    private void resize(int newCapacity){
-        Element[] newData = (Element[]) new Object[newCapacity + 1];
-        for (int i = 0; i < size; i ++)
-            newData[i] = data[(i + front) % data.length];
-        data = newData;
-        front = 0;
-        tail = size;
     }
 
     public static void main(String[] args){
