@@ -41,7 +41,7 @@ public class Main {
 
         System.out.println(llStack.peek());
 
-        int operationCount = 100000;
+        int operationCount = 10000;
         ArrayStack<InternalError> arrayStack = new ArrayStack<>();
         double arrayStackTime = performanceTest(arrayStack, operationCount);
         System.out.println("Array Stack time is " + arrayStackTime);
