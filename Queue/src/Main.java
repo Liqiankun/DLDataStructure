@@ -1,5 +1,16 @@
-public class Main {
+import java.util.Random;
 
+public class Main {
+    public static double performanceTest(Queue<Integer> queue, int operationCount){
+        long nowTime = System.nanoTime();
+        Random random = new Random();
+        for (int i = 0; i < operationCount; i ++)
+            queue.enqueue(random.nextInt(Integer.MAX_VALUE));
+        for (int i = 0; i < operationCount; i ++)
+            queue.dequeue();
+        long endTime = System.nanoTime();
+        return (endTime - nowTime) / 100000000.0;
+    }
     public static void main(String[] args) {
         ArrayQueue queue = new ArrayQueue();
         queue.enqueue(1);
@@ -21,5 +32,16 @@ public class Main {
         System.out.println(lQueue);
 
         System.out.println(lQueue.getFront());
+
+        int operationCount = 100000;
+
+        ArrayQueue arrayQueue = new ArrayQueue();
+        double arrayTime = performanceTest(arrayQueue, operationCount);
+        System.out.println("ArrayQueue time is " + arrayTime);
+
+        LoopQueue loopQueue = new LoopQueue();
+        double loopTime = performanceTest(loopQueue, operationCount);
+        System.out.println("LoopQueue time is " + loopTime);
+
     }
 }
