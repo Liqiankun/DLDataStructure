@@ -2,20 +2,20 @@ public class Main {
 
     // remove all Nodes are equals val
     public static Node removeElementsOne(Node head, int val){
-        while (head != null && head.e != val){
+        while (head != null && head.e == val){
             Node removeNode = head;
             head = head.next;
-            removeNode = null;
+            removeNode.next = null;
         }
 
         if (head == null)
-            return null;
+            return head;
         Node prev = head;
         while (prev.next != null) {
             if (prev.next.e == val) {
                 Node removeNode = prev.next;
                 prev.next = removeNode.next;
-                removeNode = null;
+                removeNode.next = null;
             }
             else
                 prev = prev.next;
@@ -47,9 +47,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 4, 6, 7, 6};
-        Node node = new Node(nums);
-        System.out.println(node);
-        System.out.println(removeElementThree(node, 6));
+        int[] numsOne = {1, 2, 3, 4, 6, 7, 6};
+        Node nodeOne = new Node(numsOne);
+        System.out.println(nodeOne);
+        System.out.println(removeElementsOne(nodeOne, 6));
+
+//        int[] numsThree = {1, 2, 3, 4, 6, 7, 6};
+//        Node nodeThree = new Node(numsThree);
+//        System.out.println(nodeThree);
+//        System.out.println(removeElementThree(nodeThree, 6));
     }
 }
