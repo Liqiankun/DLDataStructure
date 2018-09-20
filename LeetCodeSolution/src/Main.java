@@ -52,9 +52,9 @@ public class Main {
         System.out.println(nodeOne);
         System.out.println(removeElementsOne(nodeOne, 6));
 
-//        int[] numsThree = {1, 2, 3, 4, 6, 7, 6};
-//        Node nodeThree = new Node(numsThree);
-//        System.out.println(nodeThree);
-//        System.out.println(removeElementThree(nodeThree, 6));
+        int[] numsThree = {1, 2, 3, 4, 6, 7, 6};
+        Node nodeThree = new Node(numsThree);
+        System.out.println(nodeThree);
+        System.out.println(removeElementThree(nodeThree, 6));
     }
 }
