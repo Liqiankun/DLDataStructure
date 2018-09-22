@@ -13,10 +13,26 @@ public class Main {
         bst.preOrder();
         System.out.println("\n");
 
+        bst.preOrderNoRecursion();
+        System.out.println("\n");
+
         bst.inOrder();
         System.out.println("\n");
 
         bst.postOrder();
         System.out.println("\n");
+
+        bst.levelOrder();
+        System.out.println("\n");
+
+        System.out.println(bst.maximum());
+        System.out.println(bst.minimum());
+        System.out.println("\n");
+
+        System.out.println(bst.removeMax());
+        System.out.println(bst.removeMin());
+        System.out.println("\n");
+
+        System.out.println(bst);
     }
 }

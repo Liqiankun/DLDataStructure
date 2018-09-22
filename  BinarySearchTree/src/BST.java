@@ -1,3 +1,7 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class BST<Element extends Comparable<Element>> {
     private class Node {
         public Element e;
@@ -70,6 +74,19 @@ public class BST<Element extends Comparable<Element>> {
         }
     }
 
+    public void preOrderNoRecursion(){
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+            if (cur.right != null)
+                stack.push(cur.right);
+            if (cur.left != null)
+                stack.push(cur.left);
+        }
+    }
+
     public void inOrder(){
         inOrder(root);
     }
@@ -93,6 +110,118 @@ public class BST<Element extends Comparable<Element>> {
         postOrder(node.right);
         System.out.println(node.e);
     }
+
+    public void levelOrder(){
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node cur = q.remove();
+            System.out.println(cur.e);
+            if (cur.left != null)
+                q.add(cur.left);
+            if (cur.right != null)
+                q.add(cur.right);
+        }
+    }
+
+    public Element minimum(){
+        if (size == 0)
+            throw new IllegalArgumentException("BST is empty");
+        return minimum(root).e;
+    }
+
+    private Node minimum(Node node){
+        if (node.left == null)
+            return node;
+        return minimum(node.left);
+    }
+
+    public Element maximum(){
+        if (size == 0)
+            throw new IllegalArgumentException("BST is empty");
+        return maximum(root).e;
+    }
+
+    private Node maximum(Node node){
+        if (node.right == null)
+            return node;
+        return maximum(node.right);
+    }
+
+    public Element removeMin(){
+        Element min = minimum();
+        removeMin(root);
+        return min;
+    }
+
+    private Node removeMin(Node node){
+        if (node.left == null){
+            Node rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+
+    public Element removeMax(){
+        Element min = maximum();
+        removeMax(root);
+        return min;
+    }
+
+    private Node removeMax(Node node){
+        if (node.right == null){
+            Node leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+        node.right = removeMax(node.right);
+        return node;
+    }
+
+    public void remove(Element e){
+        root = remove(root, e);
+    }
+
+    private Node remove(Node node, Element e){
+        if (node == null)
+            return null;
+        if (e.compareTo(node.e) < 0){
+            node.left = remove(node.left, e);
+            return node;
+        }
+        else if (e.compareTo(node.e) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        }
+        else {
+            if (node.left == null){
+                Node rightNode = node.right;
+                node.right = null;
+                size --;
+                return rightNode;
+            }
+
+            if (node.right == null) {
+                Node leftNode = node.left;
+                node.left = null;
+                size --;
+                return leftNode;
+            }
+
+            Node successor = minimum(node.right);
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+            node.left = node.right = null;
+            return successor;
+        }
+
+    }
+
 
     @Override
     public String toString(){
